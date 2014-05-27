@@ -1,35 +1,26 @@
-html{
-	height:100%;
-}
-body{
-	margin:0;
-	padding:0;
-	height:100%;
-	font-size:12px;
-	overflow:hidden;
-}
+html{ height:100%; }
 
-.CodeMirror{
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-	height:100%;
-    z-index: 9999;
-    font-size:14pt;
-  	font-family: Consolas, monospace; 
-  	line-height: 1.1em;  
-}
-.CodeMirror pre{
-	font-family: Consolas, monospace; 
-	font-size:14pt;
-}
-.CodeMirror-scroll{
-	height:100% !important;
-}
+body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 
-/* ============== Bespin Start ==================== */
+/* CodeMirror Begin */
+.CodeMirror {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	font-size: 16px;
+	font-family: Consolas, monospace;
+	line-height: 20px;
+}
+.CodeMirror-focused .cm-matchhighlight { 
+	background: rgba(0, 255, 255, .2) !important;
+}
+/* CodeMirror End */
+
+/* ============== Bespin 主题 Start ==================== */
 .cm-s-Bespin .CodeMirror-selected { background: #4C4A49 !important; }
 .cm-s-Bespin .CodeMirror-gutters { background: #28211C; border-right: 1px solid #28211C; }
 .cm-s-Bespin .CodeMirror-linenumber { color: #71675D; }
@@ -54,12 +45,12 @@ body{
 .cm-s-Bespin span.cm-disabled{
 	color:#999;
 }
-.cm-s-Bespin .cm-searching{
-    background: rgba(255, 255, 0, .2);
+.cm-s-Bespin .cm-searching {
+	background: rgba(255, 255, 0, .2);
 }
-/* ============== Bespin End ==================== */
+/* ============== Bespin 主题 End ==================== */
 
-/* ============== Dawn Start ==================== */
+/* ============== Dawn 主题 Start ==================== */
 .cm-s-Dawn .CodeMirror-selected { background: #B9CAFA !important; }
 .cm-s-Dawn .CodeMirror-gutters { background: #F9F9F9; border-right: 1px solid #F9F9F9; }
 .cm-s-Dawn .CodeMirror-linenumber { color: #808080; }
@@ -84,53 +75,46 @@ body{
 .cm-s-Dawn span.cm-disabled{
 	color:#796698;
 }
-/* ============== Dawn End ==================== */
+/* ============== Dawn 主题 End ==================== */
 
-/*对话框样式*/
-.appdialog .tip{
-	color:#999;
-}
-.appdialog .buttonline{
-	text-align:right;
-}
-.appdialog input,.appdialog textarea{
-	outline:0;
-	border:1px solid #ccc;
-	border-radius:3px;
-	padding:5px;
-}
-.appdialog button{
-	border-width:1px;
-	border-color:#fff #888 #888 #fff;
-	background:#F0F0F0;
-	cursor:pointer;
-	font-size:13px;
-	font-weight: normal;
-}
-.dnssetup textarea{
-	width:300px;
-	height:100px;
-}
-.about{
-	font-size:14px;
-	line-height: 120%;
-}
-.about .ver{
-	font-size:12px;
-}
+/* 添加新方案 Begin */
+.create-hosts{ padding: 10px; }
+.create-hosts input { padding: 3px 0px; }
+/* 添加新方案 End */
 
-.hostname input{
-	padding:10px;
-	font-size:30px;
-}
+/* DNS设置 Begin */
+.dnssetup{ width: 385px; padding: 10px; }
+.dnssetup label{ float: right; }
+.dnssetup .tip{ color: #999; }
+.dnssetup textarea{ padding: 5px; width:270px; height:100px; border: 1px solid #999; }
+.dnssetup .error{ color: red; }
+/* DNS设置 End */
 
-.localip textarea{
-	padding:10px;
-	font-size:30px;
-	width:300px;
-	height:150px;
-}
+/* 关于 Begin */
+.about{ font-size:13px; line-height: 120%; padding: 0 10px; }
+.about .ver{ font-size:12px; }
+/* 关于 End */
 
-.preference{
-	min-width:200px;
-}
+/* 当前主机名 Begin */
+.hostname input { border: 0px; font-size: 28px; }
+/* 当前主机名 End */
+
+/* 当前使用hosts/本机IP列表 公共 */
+.use-hosts textarea,.localip textarea{ padding: 0px; border: 0px; }
+
+/* 当前使用hosts Begin */
+.use-hosts{ height: 150px; }
+.use-hosts textarea{ height: 100%; }
+/* 当前使用hosts End */
+
+/* 本机IP列表 Begin */
+.localip{ height: 90px; }
+.localip textarea { width: 260px; height: 100%; }
+/* 本机IP列表 End */
+
+/* 首选项 Begin */
+.preference{ width: 200px; }
+.preference tr{ height : 40px; }
+.preference tr td { width: 100px; }
+.preference label{ float: right; }
+/* 首选项 End */

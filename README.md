@@ -10,9 +10,9 @@ hostsPlus是一款强大的hosts增强管理软件，可以方便高效的管理
 1. 多文件Hosts方案管理
 2. 单Hosts文件中分组管理
 3. 绑定到机器名或域名
-4. 远程Hosts
+4. 远程Hosts **未合并**
 5. 切换DNS
-6. CDN一致性检测
+6. CDN一致性检测 **未合并**
 7. 主题支持
 8. 跨平台兼容：Windows,Linux,Mac
 

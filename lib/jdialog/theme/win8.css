@@ -1,0 +1,43 @@
+/*整体样式*/
+.dd_win8 .jDialog{
+	font:12px Consolas, monospace;
+	border: 1px solid #737373;
+}
+
+/*标题区域*/
+.dd_win8 .dd_title{ background:#979797; }
+
+/*关闭按钮*/
+.dd_win8 .dd_close{
+	position:absolute;
+	display:block;
+	right:5px;
+	top:0px;
+	height:19px;
+	width: 44px;
+	line-height:16px;
+	color:#FFF;
+	font-size:16px;
+	text-align: center;
+	text-decoration:none;
+	cursor:pointer;
+	background: #C75050;
+}
+
+/*内容区域*/
+.dd_win8 .dd_content{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	background: #F0F0F0;
+	border: 5px solid #979797;
+	font-size:13px;
+	color:#333;
+}
+
+/*提示窗口按钮*/
+.dd_win8 .dd_button button{
+	border: 1px solid #ACACAC;
+	background: #EDEDED;
+}

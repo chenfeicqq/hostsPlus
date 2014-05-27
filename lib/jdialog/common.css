@@ -1,0 +1,72 @@
+/*背景遮盖层*/
+.dd_mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	opacity: .2;
+	filter: alpha(opacity = 20);
+	_position: absolute;
+	_height: expression(Math.max ( document.documentElement.clientHeight, document.documentElement.scrollHeight)+'px' );
+	_width: expression(Math.max ( document.documentElement.clientWidth, document.documentElement.scrollWidth)+'px' );
+}
+
+/*弹窗*/
+.jDialog {
+	position: absolute;
+	text-align:left;
+}
+
+/*阴影*/
+.dd_shadow {
+	position: absolute;
+	background: #000;
+}
+
+/*拖拽*/
+.dd_drag {
+	cursor: move;
+	user-selec: none;
+	-moz-user-selec: none;
+	-webkit-user-select: none;
+}
+
+/*标题*/
+.jDialog .dd_title{
+	padding:5px 0px 0px 5px;
+	font-size: 14px;
+}
+
+/*弹窗内容*/
+.jDialog .dd_content {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+/*弹窗-提示信息*/
+.jDialog .dd_content .dd_info { padding: 20px; }
+
+/*提示窗口按钮区*/
+.jDialog .dd_content .dd_button { text-align: right; padding: 5px 0px 5px 0px; }
+
+/*提示窗口按钮区按钮*/
+.jDialog .dd_content .dd_button button {
+	font-weight: normal;
+	margin-right: 10px;
+	padding: 4px 15px;
+	vertical-align: bottom;
+}
+
+/*确定按钮*/
+.jDialog .dd_content .dd_button .dd_ok{}
+
+/*取消按钮*/
+.jDialog .dd_content .dd_button .dd_cancel{}
+
+/*是按钮*/
+.jDialog .dd_content .dd_button .dd_yes{}
+
+/*否按钮*/
+.jDialog .dd_content .dd_button .dd_no{}

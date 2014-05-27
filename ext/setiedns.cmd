@@ -1,6 +1,6 @@
 @echo off
 
-if "%1"=="1" goto :disable
+if "%1"=="disable" goto :disable
 
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v DnsCacheEnabled /f
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v DnsCacheTimeout /f
