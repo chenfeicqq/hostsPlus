@@ -35,26 +35,22 @@
 					break;
 				// N
 				case 78:
-					if(event.ctrlKey){
+					// Command / Ctrl + N
+					if(isMac ? event.metaKey : event.ctrlKey){
 
-						if (event.shiftKey) {
-							// Ctrl + Shift + N
-
-							// 添加新方案
-							editor.checkUnsaved(function(){
-								windowCreate.show();
-							});
-						}
+						// 添加新方案
+						editor.checkUnsaved(function(){
+							windowCreate.show();
+						});
 
 						return false;
 					}
 					break;
 				// Q
 				case 81:
-					// Command
-					if(event.metaKey){
+					// Command + Q
+					if(isMac && event.metaKey){
 
-						// Command + Q
 						// 退出程序
 						editor.checkUnsaved(function(){
 							app.exit();
@@ -65,31 +61,39 @@
 					break;
 				// W
 				case 87:
-					if(event.ctrlKey){
+					// Command / Ctrl + W
+					if(isMac ? event.metaKey : event.ctrlKey){
 
-						if (event.shiftKey) {
-							// Ctrl + Shift + W
-							// 删除当前方案
-							windowDelete.show();
-						}
+						// 删除当前方案
+						windowDelete.show();
 
 						return false;
 					}
+
 					break;
 				// Esc
 				case 27:
-					// 隐藏应用程序
-					app.hide();
-					return false;
+					// 非Mac系统
+					if(!isMac){
+
+						// 隐藏应用程序
+						app.toggleShow();
+
+						return false;
+					}
+
+					break
 				// F1
 				case 112:
 					// 显示使用指南
 					menuHelp.manual();
+
 					break;
 				// F11
 				case 122:
 					// 切换全屏
 					app.toggleFullScreen();
+
 					return false;
 			}
 		});

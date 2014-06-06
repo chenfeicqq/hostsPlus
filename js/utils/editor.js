@@ -18,9 +18,30 @@
 		// 主题
 		'theme'                     : settings.getCurrentTheme(),
 		// 扩展快捷键
-		'extraKeys'                 : {
+		'extraKeys'                 : isMac ? {
 			// 切换选中区域行是否启用
-			'Ctrl-Q'       : function() {
+			'Cmd-E'       : function() {
+				toogleLines(true);
+			},
+			// 切换选中区域行是否注释
+			'Cmd-/'       : function() {
+				toogleLines();
+			},
+			// 添加新分组
+			'Cmd-G'       : function() {
+				newGroup();
+			},
+			// 保存
+			'Cmd-S'       : function() {
+
+				if(editor.isUnsaved()){
+
+					editor.save();
+				}
+			}
+		} : {
+			// 切换选中区域行是否启用
+			'Ctrl-E'       : function() {
 				toogleLines(true);
 			},
 			// 切换选中区域行是否注释
@@ -38,13 +59,7 @@
 
 					editor.save();
 				}
-			},
-			// 查找
-			'F3'           : 'findNext',
-			'Shift-F3'     : 'findPrev',
-			// 替换
-			'Ctrl-H'       : 'replace',
-			'Ctrl-Shift-H' : 'replaceAll'
+			}
 		},
 		// 行号
 		'lineNumbers'               : true,
@@ -83,10 +98,15 @@
 
 				// 屏蔽无效控制键
 				if(keyName){
-					// 非 Q Y A S G Z C X V W N /
-					if(/^[^qyasgzcxvwn\/]$/i.test(keyName)){
+					// 非 S E G A Y Z X C V W N /
+					if(/^[^segayzxcvwn\/]$/i.test(keyName)){
 						// 非 Tab
 						if(event.which !== 9){
+							return false;
+						}
+					} else {
+						// 非Shift
+						if(event.shiftKey){
 							return false;
 						}
 					}
@@ -164,16 +184,13 @@
 	 * 是否未保存
 	 */
 	editor['isUnsaved'] = function(){
-		return codeMirror.historySize().undo > 0;
+		return codeMirror.getValue() != settings.getCurrentHosts()['content'];
 	};
 
 	/**
 	 * 保存编辑结果
 	 */
 	editor['save'] = function() {
-
-		// 清空历史操作
-		codeMirror.clearHistory();
 
 		// 保存 hosts
 		settings.setCurrentHosts(codeMirror.getValue());
