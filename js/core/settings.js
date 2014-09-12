@@ -22,7 +22,6 @@
 		},
 		// DNS
 		'dns' : {
-			'wifi' : false,
 			'default' : {
 				'name' : '本地DNS',
 				'ip' : ''
@@ -50,6 +49,13 @@
 				'autorun' : false,
 				// 开启后自动隐藏
 				'startHide' : false
+			},
+			// 编辑器
+			'editor' : {
+				'font' : {
+					// 字体大小
+					'size' : '16px'
+				}
 			},
 			// 主题
 			'theme' : {

@@ -29,7 +29,7 @@
 			},
 			// 添加新分组
 			'Cmd-G'       : function() {
-				newGroup();
+				editor.createGroup();
 			},
 			// 保存
 			'Cmd-S'       : function() {
@@ -50,7 +50,7 @@
 			},
 			// 添加新分组
 			'Ctrl-G'       : function() {
-				newGroup();
+				editor.createGroup();
 			},
 			// 保存
 			'Ctrl-S'       : function() {
@@ -65,13 +65,15 @@
 		'lineNumbers'               : true,
 		// 高亮
 		'highlightSelectionMatches' : true,
+		// 自动获取焦点
+		'autofocus'                 : true,
 		'fixedGutter'               : true
 	});
 
 	editor['init'] = function() {
 
-		// 编辑器获取焦点
-		codeMirror.focus();
+		// 设置字体
+		initFont();
 
 		// 方案变更引起的修改
 		var changing = false;
@@ -129,9 +131,6 @@
 				// 清空历史操作
 				codeMirror.clearHistory();
 
-				// 编辑器获取焦点
-				codeMirror.focus();
-
 				changing = false;
 
 				$(editor).trigger('change');
@@ -146,8 +145,18 @@
 				// 修改主题
 				codeMirror.setOption("theme", currentTheme);
 			}
+
+			// 重设字体
+			initFont();
 		});
 	};
+
+	/**
+	 * 设置编辑器字体
+	 */
+	function initFont(){
+		$('.CodeMirror').css('fontSize', settings.get('preference')['editor']['font']['size']);
+	}
 
 	/**
 	 * 检查未保存内容
@@ -335,7 +344,7 @@
 	/**
 	 * 当前位置新建分组
 	 */
-	function newGroup(){
+	editor['createGroup'] = function(){
 
 		var prefix = '# ==================== ';
 		var groupName = 'group';

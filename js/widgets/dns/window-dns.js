@@ -8,12 +8,9 @@
 
 	var html = '<table class="dnssetup">\
 					<tbody>\
-						<tr' + (isLinux ? ' style="display:none;" ' : '') + '>\
-							<td style="width: 65px;">\
-								<label for="J-window-dns-wifi">无线网络：</label>\
-							</td>\
-							<td>\
-								<input id="J-window-dns-wifi" type="checkbox" />\
+						<tr>\
+							<td colspan="2">\
+								<div class="tip">中间以空格分隔，多行为多个DNS。（例：美国DNS 8.8.8.8）</div>\
 							</td>\
 						</tr>\
 						<tr>\
@@ -21,17 +18,12 @@
 								<label for="J-window-dns-list">DNS列表：</label>\
 							</td>\
 							<td>\
-								<span class="error" id="J-window-dns-error"></span>\
-							</td>\
-						</tr>\
-						<tr>\
-							<td>\
 								<textarea id="J-window-dns-list"></textarea>\
 							</td>\
 						</tr>\
 						<tr>\
-							<td colspan="2">\
-								<span class="tip">中间以空格分隔，多行为多个DNS。（例：美国DNS 8.8.8.8）</span>\
+							<td>\
+								<div class="error" id="J-window-dns-error"></div>\
 							</td>\
 						</tr>\
 					</tbody>\
@@ -66,7 +58,7 @@
 				var list = getList();
 
 				if(null == list){
-					$('#J-window-dns-error').text('DNS列表格式无效，请重新修改。');
+					$('#J-window-dns-error').text('格式错误，请重新修改。');
 					$('#J-window-dns-list').focus();
 					return null;
 				}

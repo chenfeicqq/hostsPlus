@@ -9,7 +9,7 @@ hostsPlus是一款强大的hosts增强管理软件，可以方便高效的管理
 
 1. 多文件Hosts方案管理
 2. 单Hosts文件中分组管理
-3. 绑定到机器名或域名
+3. 绑定到机器名或域名（Windows）
 4. 远程Hosts **未合并**
 5. 切换DNS
 6. CDN一致性检测 **未合并**
@@ -28,7 +28,7 @@ hostsPlus is released under the MIT license:
 
 > The MIT License
 > 
-> Copyright (c) 2012 Yanis Wang \<yanis.wang@gmail.com\>
+> Copyright (c) 2014 Yanis Wang \<yanis.wang@gmail.com\>
 > 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

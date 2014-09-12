@@ -108,20 +108,6 @@ function getLocalIP() {
 	return arrLocalIP;
 }
 
-// 获得当前激活网卡名
-function getActiveNetname(){
-	var arrInterfaces = air.NetworkInfo.networkInfo.findInterfaces(),
-		interfaceObj;
-	if (arrInterfaces !== null) {
-		for (var i = 0, count1 = arrInterfaces.length; i < count1; i++) {
-			interfaceObj = arrInterfaces[i];
-			if (interfaceObj.active) {
-				return interfaceObj.displayName;
-			}
-		}
-	}
-}
-
 // 访问外部扩展
 function callExt(api) {
 	if (air.NativeProcess.isSupported) {
@@ -146,7 +132,7 @@ function callExt(api) {
 				hasCallback = typeof callback === 'function';
 			for (var i = 1, c = callArguments.length - (hasCallback ? 1 : 0); i < c; i++){
 				if(callArguments[i] !== null && callArguments[i] !== undefined){
-					args.push(callArguments[i]);
+					args.push(callArguments[i].replace(/ /g, '_~'));
 				}
 			}
 			nativeProcessStartupInfo.arguments = args;
@@ -195,8 +181,53 @@ function ping(hostname, callback) {
 
 // 设置系统DNS
 function setSysDNS(dnsip) {
-	var netname = getActiveNetname();
-	callExt('setsysdns', netname, dnsip ? dnsip : 'clear');
+	if(isMac){
+		getActiveNetnameMac(function(netname){
+			callExt('setsysdns', netname, dnsip ? dnsip : 'clear');
+		});
+	} else {
+		var netname = getActiveNetnameWin();
+		callExt('setsysdns', netname, dnsip ? dnsip : 'clear');
+	}
+}
+
+// 获得当前激活网卡名(Win)
+function getActiveNetnameWin(){
+	var arrInterfaces = air.NetworkInfo.networkInfo.findInterfaces(),
+		interfaceObj;
+	if (arrInterfaces !== null) {
+		for (var i = 0, count1 = arrInterfaces.length; i < count1; i++) {
+			interfaceObj = arrInterfaces[i];
+			if (interfaceObj.active) {
+				return interfaceObj.displayName;
+			}
+		}
+	}
+}
+
+// 获得当前激活网卡名(Mac)
+function getActiveNetnameMac(callback){
+	var hardwareport;
+	var arrInterfaces = air.NetworkInfo.networkInfo.findInterfaces(),
+		interfaceObj;
+	if (arrInterfaces !== null) {
+		for (var i = 0, count1 = arrInterfaces.length; i < count1; i++) {
+			interfaceObj = arrInterfaces[i];
+			if (interfaceObj.active) {
+				hardwareport = interfaceObj.name;
+				break;
+			}
+		}
+	}
+	if(hardwareport){
+		callExt('getallnetname', function(output){
+			var regNetname = new RegExp('(?:^|\\n)Hardware Port:\\s*([^\n]+)\\r?\\nDevice:\\s*'+hardwareport, 'i');
+			var match = output.match(regNetname);
+			if(match !== null){
+				callback(match[1]);
+			}
+		});
+	}
 }
 
 // 清除系统DNS

@@ -25,12 +25,12 @@
 
 	function initMenu(){
 
-		menuTool['menu'].addItem(new air.NativeMenuItem('当前主机名')).addEventListener(air.Event.SELECT, function(){
-			windowHost.show();
-		});
-
 		menuTool['menu'].addItem(new air.NativeMenuItem('本机IP列表')).addEventListener(air.Event.SELECT, function(){
 			windowIP.show();
+		});
+
+		menuTool['menu'].addItem(new air.NativeMenuItem('当前主机名')).addEventListener(air.Event.SELECT, function(){
+			windowHost.show();
 		});
 
 		menuTool['menu'].addItem(new air.NativeMenuItem('当前使用hosts')).addEventListener(air.Event.SELECT, function(){
@@ -54,11 +54,6 @@
 				setIeDns(checked ? 'enable' : 'disable');
 
 				saveCurrent(menuItem['label'], !checked)
-			});
-	
-			menuTool['menu'].addItem(new air.NativeMenuItem('关闭FF DNS缓存')).addEventListener(air.Event.SELECT, function(){
-
-				air.navigateToURL(new air.URLRequest('https://addons.mozilla.org/zh-cn/firefox/addon/hostadmin/'));
 			});
 		}
 

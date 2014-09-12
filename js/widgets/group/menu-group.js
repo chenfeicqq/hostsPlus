@@ -5,6 +5,7 @@
 
 	// imports
 	var settings = _win.settings;
+	var editor = _win.editor;
 
 	var menuGroup = {
 		'name' : '分组',
@@ -25,13 +26,24 @@
 		// 初始化默认菜单项
 		menuGroup['menu'].addItem(initDefault());
 
-		// 分隔符
-		menuGroup['menu'].addItem(new air.NativeMenuItem('', true));
+		// 自定义group菜单项
+		var menuItems = initCustom();
 
-		// 初始化自定义group菜单项
-		initCustom().forEach(function(menuItem){
-			menuGroup['menu'].addItem(menuItem);
-		});
+		if(menuItems.length > 0){
+			// 分隔符
+			menuGroup['menu'].addItem(new air.NativeMenuItem('', true));
+
+			// 初始化关闭所有分组菜单项
+			menuGroup['menu'].addItem(initCloseAll());
+
+			// 分隔符
+			menuGroup['menu'].addItem(new air.NativeMenuItem('', true));
+
+			// 初始化自定义group菜单项
+			menuItems.forEach(function(menuItem){
+				menuGroup['menu'].addItem(menuItem);
+			});
+		}
 	};
 
 	/**
@@ -45,6 +57,21 @@
 	 * 初始化默认菜单项
 	 */
 	function initDefault(){
+		var menuItem = new air.NativeMenuItem('添加新分组');
+
+		menuItem.addEventListener(air.Event.SELECT, function(){
+
+			editor.createGroup();
+		});
+
+		return menuItem;
+	}
+
+	/**
+	 * 初始化关闭所有分组菜单项
+	 */
+	function initCloseAll(){
+
 		var menuItem = new air.NativeMenuItem('关闭所有分组');
 
 		menuItem.addEventListener(air.Event.SELECT, function(){

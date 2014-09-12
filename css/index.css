@@ -83,11 +83,11 @@ body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 /* 添加新方案 End */
 
 /* DNS设置 Begin */
-.dnssetup{ width: 385px; padding: 10px; }
-.dnssetup label{ float: right; }
-.dnssetup .tip{ color: #999; }
-.dnssetup textarea{ padding: 5px; width:270px; height:100px; border: 1px solid #999; }
-.dnssetup .error{ color: red; }
+.dnssetup{ width: 380px; padding: 0px 10px 0px 10px; }
+.dnssetup label{ float: left; width: 60px; }
+.dnssetup textarea{ padding: 5px; width: 290px; height: 100px; border: 1px solid #999; }
+.dnssetup .tip{ color: #999; width: 100%; text-align: center; line-height: 40px; }
+.dnssetup .error{ color: red; height: 13px; }
 /* DNS设置 End */
 
 /* 关于 Begin */
@@ -112,9 +112,16 @@ body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 .localip textarea { width: 260px; height: 100%; }
 /* 本机IP列表 End */
 
-/* 首选项 Begin */
+/* 设置-首选项 Begin */
 .preference{ width: 200px; }
 .preference tr{ height : 40px; }
 .preference tr td { width: 100px; }
 .preference label{ float: right; }
-/* 首选项 End */
+/* 设置-首选项 End */
+
+/* 设置-编辑器 Begin */
+.editor{ width: 210px; }
+.editor tr{ height : 40px; }
+.editor label{ float: right; }
+.editor input{ width: 120px; }
+/* 设置-编辑器 End */
