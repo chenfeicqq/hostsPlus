@@ -90,6 +90,13 @@ body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 .dnssetup .error{ color: red; height: 13px; }
 /* DNS设置 End */
 
+/* 快捷键 Begin */
+.shortcut{ width: 380px; font-size: 13px; line-height: 120%; padding: 10px; }
+.shortcut .group{ font-size: 12px; font-weight: bold; padding-top: 5px; border-bottom: 1px solid; }
+.shortcut .key{ font-size: 12px; width: 65%; }
+.shortcut .function{ font-size: 12px; }
+/* 快捷键 End */
+
 /* 关于 Begin */
 .about{ font-size:13px; line-height: 120%; padding: 0 10px; }
 .about .ver{ font-size:12px; }
@@ -124,4 +131,5 @@ body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 .editor tr{ height : 40px; }
 .editor label{ float: right; }
 .editor input{ width: 120px; }
+.editor select{ width: 120px; }
 /* 设置-编辑器 End */

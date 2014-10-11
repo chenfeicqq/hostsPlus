@@ -5,6 +5,7 @@
 
 	// imports
 	var settings = _win.settings;
+	var editor = _win.editor;
 	var windowHost = _win.windowHost;
 	var windowIP = _win.windowIP;
 	var windowHosts = _win.windowHosts;
@@ -35,6 +36,13 @@
 
 		menuTool['menu'].addItem(new air.NativeMenuItem('当前使用hosts')).addEventListener(air.Event.SELECT, function(){
 			windowHosts.show();
+		});
+
+		// 分隔符
+		menuTool['menu'].addItem(new air.NativeMenuItem('', true));
+
+		menuTool['menu'].addItem(new air.NativeMenuItem('格式化')).addEventListener(air.Event.SELECT, function(){
+			editor.format();
 		});
 
 		if(isWin){

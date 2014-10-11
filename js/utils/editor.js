@@ -5,7 +5,6 @@
 
 	// imports
 	var settings = _win.settings;
-	var settings = _win.settings;
 
 	var editor = {};
 
@@ -27,6 +26,10 @@
 			'Cmd-/'       : function() {
 				toogleLines();
 			},
+			// 格式化
+			'Shift-Cmd-F' : function() {
+				editor.format();
+			},
 			// 添加新分组
 			'Cmd-G'       : function() {
 				editor.createGroup();
@@ -47,6 +50,10 @@
 			// 切换选中区域行是否注释
 			'Ctrl-/'       : function() {
 				toogleLines();
+			},
+			// 格式化
+			'Shift-Ctrl-F' : function() {
+				editor.format();
 			},
 			// 添加新分组
 			'Ctrl-G'       : function() {
@@ -73,7 +80,7 @@
 	editor['init'] = function() {
 
 		// 设置字体
-		initFont();
+		refreshFont();
 
 		// 方案变更引起的修改
 		var changing = false;
@@ -100,14 +107,22 @@
 
 				// 屏蔽无效控制键
 				if(keyName){
+
 					// 非 S E G A Y Z X C V W N /
 					if(/^[^segayzxcvwn\/]$/i.test(keyName)){
+
 						// 非 Tab
 						if(event.which !== 9){
-							return false;
+
+							// 非 Shift || 非 F 结束
+							if(!event.shiftKey || /^[^f]$/i.test(keyName)){
+								return false;
+							}
 						}
+
 					} else {
-						// 非Shift
+
+						// Shift 结束
 						if(event.shiftKey){
 							return false;
 						}
@@ -147,14 +162,14 @@
 			}
 
 			// 重设字体
-			initFont();
+			refreshFont();
 		});
 	};
 
 	/**
 	 * 设置编辑器字体
 	 */
-	function initFont(){
+	function refreshFont(){
 		$('.CodeMirror').css('fontSize', settings.get('preference')['editor']['font']['size']);
 	}
 
@@ -365,6 +380,69 @@
 			'ch' : prefix.length + groupName.length
 		});
 	};
+
+	/**
+	 * 格式化当前Hosts
+	 */
+	editor['format'] = function(){
+
+		codeMirror.eachLine(function(lineHandle){
+
+			var lineNumber = codeMirror.getLineNumber(lineHandle);
+
+			// 127.0.0.1 localhost -> ["127.0.0.1 localhost", "127.0.0.1", "localhost"]
+			// 127.0.0.1 localhost alibaba.com -> ["127.0.0.1 localhost", "127.0.0.1", "localhost alibaba.com"]
+			var match = lineHandle.text.match(/(\S+)\s+(.+)/);
+
+			if(match && match.length === 3){
+
+				if(isIP(match[1])){
+
+					// 默认 IP 与 域名 间隔 4 个空格
+					var _blank = '    ';
+
+					// 默认为 IPv4 长度
+					var maxLength = '255.255.255.255'.length;
+
+					// IPv6
+					if(match[1].indexOf(':') > 0){
+						maxLength = 39;
+					}
+
+					// 保持整洁，补齐 IP长度 与 最长IP/v6长度39 差
+					for(var index = 0, length = maxLength - match[1].length; index < length; index++){
+						_blank += ' ';
+					}
+
+					codeMirror.setLine(lineNumber, match[1] + _blank + $.trim(match[2]));
+				}
+			}
+		});
+
+		/*
+		$('.CodeMirror-lines > div > div > div > pre').find('span[class$="-ip"]').each(function(index, item){
+
+			var _parent = $(item).parent();
+
+			// <span class="cm-ip">127.0.0.1</span> localhost
+			// ["<span class="cm-ip">127.0.0.1</span> localhost", "<span class="cm-ip">", "127.0.0.1", "</span>", "localhost"]
+			var match = _parent.html().match(/(<span.*">)(.*)(<\/span>)\s+(.+)/);
+
+			if(match && match.length === 5){
+
+				// 默认 IP 与 域名 间隔 4 个空格
+				var _blank = '    ';
+
+				// 保持整洁，补齐 IP 与 最长 IP 长度差
+				for(var index = 0, length = '255.255.255.255'.length - match[2].length; index < length; index++){
+					_blank += ' ';
+				}
+
+				_parent.html(match[1] + match[2] + match[3] + _blank  + match[4]);
+			}
+		});
+		*/
+	}
 
 	/**
 	 * 监听编辑器变化

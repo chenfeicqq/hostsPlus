@@ -55,17 +55,17 @@
 				'font' : {
 					// 字体大小
 					'size' : '16px'
+				},
+				// 主题
+				'theme' : {
+					// 主题列表
+					'list' : [
+						'Bespin',
+						'Dawn'
+					],
+					// 当前主题
+					'current' : 0
 				}
-			},
-			// 主题
-			'theme' : {
-				// 主题列表
-				'list' : [
-					'Bespin',
-					'Dawn'
-				],
-				// 当前主题
-				'current' : 0
 			}
 		}
 	};
@@ -144,17 +144,23 @@
 	 */
 	settings['getCurrentTheme'] = function(){
 
-		var theme = json['preference']['theme'];
+		var theme = json['preference']['editor']['theme'];
 
 		return theme['list'][theme['current']];
 	};
 
 	/**
 	 * 保存配置项
+	 * 
+	 * @param deep 是否递归合并
 	 */
-	settings['set'] = function(field, value){
+	settings['set'] = function(field, value, deep){
 
-		$.extend(json[field], value);
+		if (true === deep) {
+			$.extend(true, json[field], value);
+		} else {
+			$.extend(json[field], value);
+		}
 
 		// 触发配置项变化
 		$(settings).trigger(field);
@@ -182,7 +188,7 @@
 	 */
 	settings['setCurrentTheme'] = function(current){
 
-		json['preference']['theme']['current'] = current;
+		json['preference']['editor']['theme']['current'] = current;
 
 		// 触发配置项变化
 		$(settings).trigger('preference');
@@ -257,7 +263,7 @@
 
 			try{
 				// 忽略savedJSON的theme-list配置
-				savedJSON['preference']['general']['theme']['list'] = [];
+				savedJSON['preference']['editor']['theme']['list'] = [];
 
 				// dns-list完全使用savedJSON中配置
 				json['dns']['list'] = savedJSON['dns']['list'];
@@ -271,7 +277,7 @@
 		validateCurrent(json['hosts']);
 
 		// 记录的当前主题的index超出list，则默认为第一个
-		validateCurrent(json['preference']['theme']);
+		validateCurrent(json['preference']['editor']['theme']);
 	};
 
 	/**
