@@ -91,7 +91,7 @@ body{ margin:0; padding:0; height:100%; font-size:12px; overflow:hidden; }
 /* DNS设置 End */
 
 /* 快捷键 Begin */
-.shortcut{ width: 380px; font-size: 13px; line-height: 120%; padding: 10px; }
+.shortcut{ font-size: 13px; line-height: 120%; padding: 10px; }
 .shortcut .group{ font-size: 12px; font-weight: bold; padding-top: 5px; border-bottom: 1px solid; }
 .shortcut .key{ font-size: 12px; width: 65%; }
 .shortcut .function{ font-size: 12px; }

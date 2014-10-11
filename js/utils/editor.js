@@ -164,6 +164,9 @@
 			// 重设字体
 			refreshFont();
 		});
+
+		// 编辑器获取焦点
+		codeMirror.focus();
 	};
 
 	/**

@@ -8,7 +8,7 @@
 
 	var html = '<table class="preference">\
 					<tbody>\
-						<tr>\
+						<tr' + (NativeApplication.supportsStartAtLogin ? '' : ' style="display:none;"') + '>\
 							<td>\
 								<label for="J-general-autorun">开机启动：</label>\
 							</td>\

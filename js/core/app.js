@@ -25,29 +25,38 @@
 			});
 		}
 
-		// 切换为全屏显示
-		app.toggleFullScreen();
-
 		// 启动后隐藏
 		if(true === settings.get('preference')['general']['startHide']){
-			app.hide();
+
+			NativeApplication.nativeApplication.addEventListener('invoke', function(){
+				app.hide();
+			});
+
+		}else{
+
+			// 切换为全屏显示
+			app.toggleFullScreen();
 		}
 
-		// autorun变更后，刷新开机自动启动
-		settings.on('preference', function(){
+		// 当前平台支持开机启动
+		if(NativeApplication.supportsStartAtLogin){
 
-			var autorun = settings.get('preference')['general']['autorun'];
+			// 监听 autorun 变更后，刷新开机自动启动
+			settings.on('preference', function(){
 
-			// 设置开机自动启动
-			try {
-				// 安装后可用
-				NativeApplication.nativeApplication.startAtLogin = autorun;
+				var autorun = settings.get('preference')['general']['autorun'];
 
-			} catch (e) {
+				try {
 
-				air.trace("Cannot set autorun: " + e.message);
-			}
-		});
+					// 设置开机自动启动
+					NativeApplication.nativeApplication.startAtLogin = autorun;
+
+				} catch (e) {
+
+					air.trace("Cannot set autorun: " + e.message);
+				}
+			});
+		}
 	};
 
 	/**
@@ -62,21 +71,24 @@
 	 */
 	app['show'] = function(){
 
-		// 显示
 		nativeWindow.visible = true;
-
-		// 切换至顶
-		nativeWindow.orderToFront();
 
 		// 激活窗口
 		nativeWindow.activate();
+
+		// 切换至顶
+		nativeWindow.orderToFront();
 	};
 
 	/**
 	 * 隐藏窗口
 	 */
 	app['hide'] = function(){
-		nativeWindow.visible = false;
+		if(isMac){
+			nativeWindow.minimize();
+		}else{
+			nativeWindow.visible = false;
+		}
 	};
 
 	/**

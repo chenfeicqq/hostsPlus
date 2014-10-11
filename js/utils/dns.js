@@ -7,7 +7,7 @@
 	var settings = _win.settings;
 
 	var dns = {
-		'current' : null
+		'current' : settings.getCurrentDNS()
 	};
 
 	/**
