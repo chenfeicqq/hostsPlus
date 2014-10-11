@@ -49,6 +49,9 @@
 								<td colspan="2" class="group">行</td>\
 							</tr>\
 							<tr>\
+								<td class="key">' + (isMac ? 'Command' : 'Ctrl') + ' + D</td><td class="function">删除当前行</td>\
+							</tr>\
+							<tr>\
 								<td class="key">' + (isMac ? 'Command' : 'Ctrl') + ' + E</td><td class="function">切换行启用状态</td>\
 							</tr>\
 							<tr>\
