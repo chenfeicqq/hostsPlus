@@ -15,7 +15,7 @@
 
 			air.System.gc();
 
-		},10000);
+		}, 10000);
 
 		// 关闭按钮
 		if(isWin){
@@ -31,11 +31,6 @@
 			NativeApplication.nativeApplication.addEventListener('invoke', function(){
 				app.hide();
 			});
-
-		}else{
-
-			// 切换为全屏显示
-			app.toggleFullScreen();
 		}
 
 		// 当前平台支持开机启动
@@ -57,6 +52,9 @@
 				}
 			});
 		}
+
+		// 切换为全屏状态
+		app.toggleFullScreen();
 	};
 
 	/**

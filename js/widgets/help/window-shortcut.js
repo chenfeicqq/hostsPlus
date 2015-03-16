@@ -13,7 +13,7 @@
 								<td class="key">F1</td><td class="function">打开使用指南</td>\
 							</tr>\
 							<tr>\
-								<td class="key">F11</td><td class="function">切换全屏</td>\
+								<td class="key">F11</td><td class="function">切换最大化</td>\
 							</tr>\
 							<tr' + (!isMac ? '' : ' style="display:none;"') + '>\
 								<td class="key">ESC</td><td class="function">隐藏到系统栏</td>\

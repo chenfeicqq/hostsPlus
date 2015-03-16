@@ -11,6 +11,26 @@
 		'path' : isWin ? 'C:/Windows/System32/drivers/etc/hosts' : isLinux ? '/etc/hosts' : isMac ? '/etc/hosts' : '',
 	};
 
+	// hosts 写入失败提示信息
+	var html = '<p>' + hosts['path'] + ' 写入失败！' + (
+					isWin ?
+						'尝试如下步骤：</p>\
+						<ol>\
+							<li>右键 HostsPlus 应用程序/快捷方式，选择“属性”</li>\
+							<li>选择“安全性”选项卡</li>\
+							<li>勾选“以管理员身份运行此程序”</li>\
+							<li>重新运行 HostsPlus（如果HostsPlus当前处于运行状态，请先关闭）</li>\
+						</ol>'
+					: isMac ?
+						'尝试如下步骤：</p>\
+						<ol>\
+							<li>进入终端，执行命令：sudo chmod 666 /etc/hosts</li>\
+							<li>输入root用户密码，即可拥有权限修改hosts文件</li>\
+							<li>重新运行 HostsPlus</li>\
+						</ol>'
+					: '请检查您系统的hosts文件是否有写入权限？</p>'
+				);
+
 	/**
 	 * 初始化
 	 */
@@ -203,7 +223,7 @@
 
 				jDialog.alert({
 					'title' : '警告',
-					'content' : 'hosts写入失败，请检查您系统的hosts文件是否有写入权限？\n' + hosts['path']
+					'content' : html
 				});
 			}
 
